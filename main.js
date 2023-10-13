@@ -14,7 +14,7 @@ const showJobs = (jobs) =>{
                     <h4 class="card-title">${name}</h4>
                     <p class="job-description">${description}</p>
                 </div>
-                <a href="#" class='btn btn-outline-dark button' onclick=getCharacterById(${id})>See Info+</a>
+                <a href="#" class='btn btn-warning button p-1' onclick=getCharacterById(${id})>See Info+</a>
             </div>
            `;
            $("#jobs-all").appendChild(row);
@@ -24,4 +24,4 @@ const showJobs = (jobs) =>{
                showView("");
            }
 };
- 
+

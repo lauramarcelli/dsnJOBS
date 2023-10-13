@@ -1,31 +1,53 @@
-body {
-    overflow-x: :hidden;
-    background-color: #a1a09d;
+.body {
+  overflow-x: hidden;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #5971e8;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
   }
 
-  .loader {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #FFF;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
-    }
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
 
-    @keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-    } 
+
+
+.dsn-image{
+    width: 1200px
+    
+  }
+
+  .selectpicker{
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #fefefe;
+    list-style: none;
+
+  }
 
 .card {
-     position: relative;
-     min-height: 400 px;
+    position: relative;
+    min-height: 400 px;
+    background-color: #fefefe;  
+    border: 0.5px solid rgb(60, 60, 232);  
+    padding: 5px 10px;  
+    outline-width: 3px;  
+    outline-style: solid;  
+    outline-color: rgb(60, 60, 232);  
+    
 }
 
 .button {
@@ -33,5 +55,9 @@ body {
         bottom: 0;
 }
 
-.card-description{
+.button2{
+  align-items: end;
+}
+
+.job-description{
     text-align: justify; }

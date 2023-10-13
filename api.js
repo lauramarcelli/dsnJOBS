@@ -14,7 +14,7 @@ getDsnJobs = async () =>{
     console.log(data);
     setTimeout(() => {
         showJobs(data);
-    }, 2000);
+    }, 4000);
 };
 
 
