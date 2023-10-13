@@ -13,7 +13,7 @@
 <body>
    <nav id="navbar" class="navbar navbar-light bg-light navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-logo" href="#"><img src="assets/search-xxl.png" width="30"></a>
+        <a class="navbar-logo"><img src="assets/search-xxl.png" width="30"></a>
 
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav">
@@ -24,7 +24,27 @@
         
     </div>
    </nav>
-   <section id="searchbar"></section>
+   <section id="searchbar" class="container m-5 d-flex flex-wrap justify-content-center">
+    <div id="menu-position">
+        <select class="me-2 selectpicker show-tick"name="Position" id="position-filter">
+            <option value="">Position</option>                       
+        </select>
+    </div>
+    <div id="menu-location">
+        <select class="me-2 selectpicker show-tick" name="Location" id="location-filter">
+            <option value="">Location</option>              
+        </select>
+    </div>
+    <div id="menu-seniority">
+        <select class="me-2 selectpicker show-tick" name="Seniority" id="seniority-filter">
+            <option value="">Seniority</option>                          
+        </select>
+    </div>
+    <div>
+        <button id="btn-search" type="button" class="me-2 btn btn-success">Search</button>
+        <button id="btn-clear" type="button" class="me-2 btn btn-success">Clear</button>
+    </div>
+   </section>
    <main>
     <section id= "jobs-all" class="container gap-4 view"> Job Opportunities
     </section>
