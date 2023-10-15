@@ -6,30 +6,31 @@
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-  />
-  <script src="https://kit.fontawesome.com/11e1b50ec9.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="assets/search-xxl.png">
+/>
+<script src="https://kit.fontawesome.com/11e1b50ec9.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="assets/search-xxl.png">
     <title>DSN Jobs</title>
 </head>
 <body class="bg-white">
-   <nav id="navbar" class="navbar navbar-light bg-primary navbar-expand-lg">
-    <div class="container-fluid">
+<nav id="navbar" class="navbar navbar-light bg-primary navbar-expand-lg">
+            <ul class="navbar-nav">
+                <div class="container-fluid ">
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav">
                 <li class="nav-item me-2"><a class="nav-link text-white">DSN Jobs</a></li> 
                 <div class="d-flex flex-col-reverse">
-                     <li class="nav-item me-2 "><a href="" class="nav-link text-white">Inicio</a></li>               
-                <li class="nav-item me-2"><a href="" class="nav-link text-white"><i class=" me-1 fa-solid fa-thumbtack" style="color: #fafafa;"></i>Nuevo Puesto</a>
+                    <li class="nav-item me-2 "><a href="" class="nav-link text-white">Inicio</a></li>               
+                <li class="nav-item me-2">
+                    <button id="btn-newJob" href="" class="newjob nav-link text-white"><i class="me-1 fa-solid fa-thumbtack" style="color: #fafafa;"></i>Nuevo Puesto</button>
                     </li>
                 </div>
-               
             </ul>
         </div>
         
     </div>
-   </nav>
-   <section id="searchbar" class="container m-5 d-flex flex-wrap justify-content-center">
+</nav>
+<section id="searchbar" class="container m-5 d-flex flex-wrap justify-content-center">
     <div id="menu-position">
         <select class="me-2 selectpicker show-tick"name="Position" id="position-filter">
             <option value="">Position</option>                       
@@ -49,15 +50,12 @@
         <button id="btn-search" type="button" class="button2 me-2 btn btn-primary">Search</button>
         <button id="btn-clear" type="button" class="button2 me-2 btn btn-outline-primary">Clear</button>
     </div>
-   
-   </section>
+</section>
 
-   
-   
-   <main>
-    <div class="d-flex flex-wrap justify-content-center">
+<main>
+    <div id="getJob-img" class="d-flex flex-wrap justify-content-center">
         <img src="assets/dsn-image.jpg" alt="" class="dsn-image">
-       </div>
+    </div>
     <section id= "jobs-all" class="container gap-4 view"> 
     </section>
     <section id="creating-job"class="view"></section>
@@ -65,10 +63,54 @@
     <div>
         <span id="spinner" class ="loader view visually-hidden"><span>
     </div>   
-   </main>
-  
-    
-   <script src="main.js"></script>
+    </main>
+            <!--Boton Nueva Operacion-->
+
+            <section class="container m-auto mb-5 visually-hidden" id="newJob-section">
+                <form class="row g-3 d-flex flex-wrap justify content center">
+                    <div class="d-flex justify-content-center mb-4">
+                    <div class="d-flex flex-column col-md-6 mx-4">
+                    <!-- Position input -->
+                    <div class="form-outline mb-4">
+                    <label class="form-label">Position</label>
+                    <input type="text" id="form6Example3" class="form-control" />
+                    </div>
+                    <!-- Description input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+                    </div>
+                    <!-- Location input -->
+                    <div class="form-outline mb-4">
+                    <label class="form-label">Location</label>
+                    <input type="text" id="form6Example4" class="form-control" />
+                    </div>
+                    <!-- Seniority input -->
+                    <div class="form-outline mb-2">
+                        <label class="form-label">Seniority</label>
+                        <input type="text" id="seniority-form" class="form-control"/>
+                    </div>
+                    <div class="my-2">
+                        <label class="form-label">Programmes</label>
+                        <input type="text" id="languages-1"class="form-control mb-2"placeholder="Corel Draw">
+                        <input type="text" id="languages-2" class="form-control mb-2" placeholder="Adobe Photshop">
+                        <input type="text" id="languages-3" class="form-control mb-2"placeholder="Autocad">
+                    </div>
+                    <div>
+                        <label class="form-label">Benefits</label>
+                        <input type="text" id="health" class="form-control mb-2" placeholder="health insurance">
+                        <input type="text" id="vacations" class="form-control mb-2" placeholder="vacations">
+                        <input type="text" id="internet" class="form-control mb-2" placeholder="internet">
+                    </div>
+                    <div class="form-outline mb-4">
+                    <label class="form-label">Salary</label>    
+                    <input type="number" id="salary-form" class="form-control" />      
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Cancel</button>
+                </form>
+            </section>
+    <script src="main.js"></script>
     <script src="api.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

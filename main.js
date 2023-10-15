@@ -1,9 +1,10 @@
-
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
 
 const showJobs = (jobs) =>{
     $("#jobs-all").innerHTML = "";
     if (jobs) {
-        showView("jobs-all");
+        show("#jobs-all");
         let row = document.createElement("div")
         row.setAttribute("class", "row")
         row.classList.add("gap-3");
@@ -16,12 +17,23 @@ const showJobs = (jobs) =>{
                 </div>
                 <a href="#" class='btn btn-warning button p-1' onclick=getCharacterById(${id})>See Info+</a>
             </div>
-           `;
-           $("#jobs-all").appendChild(row);
-           }
+        `;
+        $("#jobs-all").appendChild(row);
+        hide("#spinner");
+        }
 
-           } else {
-               showView("");
-           }
+        } else {
+            show("");
+        }
 };
+
+//DOM EVENTOS//
+
+$("#btn-newJob").addEventListener("click", () => {
+    show("#newJob-section");
+    hide("#spinner")
+    hide("#jobs-all");
+    hide("#searchbar");
+    hide("#getJob-img")
+});
 

@@ -1,23 +1,21 @@
-const $ = (selector) => document.querySelector(selector);
-const $$ = (selector) => document.querySelectorAll(selector);
+const hide = (selector) => $(selector).classList.add("visually-hidden");
+const show = (selector) => $(selector).classList.remove("visually-hidden");
+const cleanContainer = (selector) => ($(selector).innerHTML = "");
 
-const showView = (view) =>{
+/*const showView = (view) =>{
     $$(".view").forEach((view) => view.classList.add("visually-hidden"));
     $(`#${view}`).classList.remove("visually-hidden")
-};
+};*/
 
 
 getDsnJobs = async () =>{
-    showView('spinner')
+    show("#spinner")
     let response = await fetch('https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs');
     let data = await response.json();
-    console.log(data);
     setTimeout(() => {
         showJobs(data);
-    }, 4000);
+    }, 2000);
 };
-
-
 getDsnJobs ();
 
 // agregar un nuevo puesto de trabajo --- POST--addDsnJob()
