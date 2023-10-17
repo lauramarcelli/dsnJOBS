@@ -3,15 +3,19 @@ const show = (selector) => $(selector).classList.remove("visually-hidden");
 const cleanContainer = (selector) => ($(selector).innerHTML = "");
  
 
-getDsnJobs = async () =>{
+getDsnJobs = async () => {
+
     spinnerEffect();
     let response = await fetch('https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs');
     let data = await response.json();
+
     setTimeout(() => {
         showJobs(data);
     }, 2000);
 };
+
 getDsnJobs ();
+
 //Filtros
 const filterCountry =(data) => {
     const countries = []
@@ -35,7 +39,6 @@ const addDsnJob = async (job) => {
     },
 }
 );
-
 const data = await response.json();
 console.log(data);
     } catch (err) {
@@ -44,7 +47,17 @@ console.log(data);
 };
 
         
+const seeInfoJob = async (id) => {
 
+    spinnerEffect();
+    let response = await fetch('https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs/${id}');
+
+    let data = await response.json();
+    
+    setTimeout(() => {
+        detailJobCard(data);
+    }, 2000);
+};
 
 
 // editar -- PATCH para editar parcialmente -- PUT si queremos cambiarle todos los campos--editDsnJob(id)
