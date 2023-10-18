@@ -1,14 +1,19 @@
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
 
+const hide = (selector) => $(selector).classList.add("visually-hidden");
+const show = (selector) => $(selector).classList.remove("visually-hidden");
+const cleanContainer = (selector) => ($(selector).innerHTML = "");
+
+
 const showJobs = (jobs) => {
   $("#jobs-all").innerHTML = "";
-  if (jobs) {
     show("#jobs-all");
     let row = document.createElement("div");
     row.setAttribute("class", "row");
     row.classList.add("gap-3");
-    for (let { position, description, location, seniority, id } of jobs) {
+    jobs.forEach(
+       ({ position, description, location, seniority, id }) => {
       row.innerHTML += `
             <div class="card col-2 d-grid gap-2 d-md-block">
                 <div class="card-body justify-content-center">
@@ -24,9 +29,8 @@ const showJobs = (jobs) => {
         `;
       $("#jobs-all").appendChild(row);
     }
-  } else {
-    show("");
-  }
+  
+  )
 };
 
 const addNewJob = () => {
@@ -82,10 +86,6 @@ const detailJobCard = ({
 
 //DOM EVENTOS//
 
-const initializeJob = (data) => {
-  showJobs(data);
-  filterCountry(data);
-};
 
 const spinnerEffect = () => {
   show(["#spinner"]);
@@ -94,6 +94,7 @@ const spinnerEffect = () => {
     hide(["#spinner"]);
   }, 2000);
 };
+
 
 $("#btn-newJob").addEventListener("click", () => {
   show("#newJob-section");
@@ -112,5 +113,14 @@ $("#btn-add-NewJob").addEventListener("click", (e) => {
   hide("#newJob-section");
 });
 
+/*$("#btn-moreInfo").addEventListener("click", (e) => {
+  e.preventDefault();
+  detailJobCard();
+  hide("#searchbar");
+  hide("#getJob-img");
+  hide("#jobs-all");
+  hide("#newJob-section");
+});*/
 
-window.addEventListener("load", initializeJob);
+
+window.onload = getDsnJobs();

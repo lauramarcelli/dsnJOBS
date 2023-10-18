@@ -1,9 +1,3 @@
-const hide = (selector) => $(selector).classList.add("visually-hidden");
-const show = (selector) => $(selector).classList.remove("visually-hidden");
-const cleanContainer = (selector) => ($(selector).innerHTML = "");
-
- 
-
 getDsnJobs = async () => {
 
     spinnerEffect();
@@ -51,7 +45,7 @@ console.log(data);
 const seeInfoJob = async (id) => {
 
     spinnerEffect();
-    let response = await fetch('https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs/${id}');
+    let response = await fetch(`https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs/${id}`);
 
     let data = await response.json();
     
@@ -60,6 +54,8 @@ const seeInfoJob = async (id) => {
     }, 2000);
 };
 
+
+  
 
 // editar -- PATCH para editar parcialmente -- PUT si queremos cambiarle todos los campos--editDsnJob(id)
 // borrar -- DELETE--deleteDsnJob(id)
