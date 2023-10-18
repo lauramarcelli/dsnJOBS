@@ -19,7 +19,7 @@ const showJobs = (jobs) => {
                     <span class="badge text-bg-secondary">${seniority}</span>
                     </div>
                 </div>
-                <a href="#" class='btn btn-warning button p-1'id="btn-moreInfo" onclick=getJobById(${id}')">See Info+</a>
+                <a href="#" class='btn btn-warning button p-1'id="btn-moreInfo" onclick=seeInfoJob(${id}')">See Info+</a>
             </div>
         `;
       $("#jobs-all").appendChild(row);
@@ -49,7 +49,7 @@ const addNewJob = () => {
   addDsnJob(newJob);
 };
 
-const detailJObCard = ({
+const detailJobCard = ({
     position,
     description,
     seniority,
@@ -58,7 +58,7 @@ const detailJObCard = ({
     salary,
     image,
   }) => {
-    show("detailJob-section");
+    show("#job-detail");
     $("#job-detail").innerHTML = `
       <div class="card col-6">
       <img src="${image}" class="card-img-top" alt="character-picture" />
@@ -112,14 +112,5 @@ $("#btn-add-NewJob").addEventListener("click", (e) => {
   hide("#newJob-section");
 });
 
-$("#btn-moreInfo").addEventListener("click", (e) => {
-    e.preventDefault();
-    detailJobCard();
-    show("#detailJob-section")
-    hide("#searchbar");
-    hide("#getJob-img");
-    hide("#jobs-all");
-    hide("#newJob-section");
-});
 
 window.addEventListener("load", initializeJob);

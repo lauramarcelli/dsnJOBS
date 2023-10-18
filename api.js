@@ -1,6 +1,7 @@
 const hide = (selector) => $(selector).classList.add("visually-hidden");
 const show = (selector) => $(selector).classList.remove("visually-hidden");
 const cleanContainer = (selector) => ($(selector).innerHTML = "");
+
  
 
 getDsnJobs = async () => {
@@ -17,7 +18,7 @@ getDsnJobs = async () => {
 getDsnJobs ();
 
 //Filtros
-const filterCountry =(data) => {
+/*const filterCountry =(data) => {
     const countries = []
     data.forEach((element) => {
         if(!countries.includes(element.location)){
@@ -26,7 +27,7 @@ const filterCountry =(data) => {
     });
     console.log(countries);
     return countries;
-}
+}*/
 
 // agregar un nuevo puesto de trabajo --- POST--addDsnJob()
 
