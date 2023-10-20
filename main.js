@@ -6,6 +6,8 @@ const show = (selector) => $(selector).classList.remove("visually-hidden");
 const cleanContainer = (selector) => ($(selector).innerHTML = "");
 
 
+//Function to show all positions//
+
 const showJobs = (jobs) => {
   $("#jobs-all").innerHTML = "";
     show("#jobs-all");
@@ -24,7 +26,7 @@ const showJobs = (jobs) => {
                     <span class="badge text-bg-secondary">${seniority}</span>
                     </div>
                 </div>
-                <a href="#" class='btn btn-warning button p-1'id="btn-moreInfo" onclick=seeInfoJob(${id}')">See Info+</a>
+                <a href="#" class='btn btn-warning button p-1' id="btn-moreInfo" onclick=seeInfoJob(${id})>See Info+</a>
             </div>
         `;
       $("#jobs-all").appendChild(row);
@@ -32,6 +34,9 @@ const showJobs = (jobs) => {
   
   )
 };
+
+//Function to add a new position//
+
 
 const addNewJob = () => {
   let newJob = {
@@ -50,41 +55,58 @@ const addNewJob = () => {
   };
 
   console.log(newJob);
-  addDsnJob(newJob);
+  addApiDsnJob(newJob);
 };
+
+
+
+//Function to see a position in detail//
+
 
 const detailJobCard = ({
     position,
     description,
     seniority,
     location,
-    benefits,
     salary,
     image,
+    id
   }) => {
     show("#job-detail");
     $("#job-detail").innerHTML = `
-      <div class="card col-6">
-      <img src="${image}" class="card-img-top" alt="character-picture" />
-      <div class="card-body">
-          <h5 class="card-title">${position}</h5>
-          <ul>
-            <li>Descripcion: ${description}</li>
-            <li>Seniority: ${seniority}</li>
-            <li>Location: ${location}</li>
-            <li>Origen: ${benefits.vacation}</li>
-            <li>Origen: ${benefits.health}</li>
-            <li>Origen: ${benefits.internet}</li>
-            <li>Location: ${salary}</li>
-          </ul>
-      </div>
-     
-    </div>
-    `;
+    <div class="row">
+                        <div class="card col-6">
+                            <img src="${image}" id="detail-img" class="card-img-top" alt="character-picture">
+                              <div class="">
+                                <h4 style="color:#6495ED"><span class="glyphicon glyphicon-th-large" id="detail-title">${position}</span></h4>
+                                <p id="detail-description">${description}</p>
+                                <p id="detail-seniority">${seniority}</p>
+                                <p id="detail-location">${location}</p>
+                                <p id="detail-salary">${salary}</p>  
+                                <a href="#" id="btn-edit-card" class="btn btn-secondary btn-xs" role="button">Edit</a>
+                                <a href="#" id="btn-delete-card" onclick=deleteApiDsnJob(${id}) class="btn btn-danger btn-default btn-xs" role="button">Delete</a>
+                            </div>
+                          </div>
+                          `;
+  hide("#searchbar");
+  hide("#getJob-img");
+  hide("#jobs-all")
   };
 
 
-//DOM EVENTOS//
+  const deleteRenderJob = (id) => {
+    const currentJobs = getDsnJobs().filter(
+      (job) => job.id !== id
+    );
+    deleteApiDsnJob(currentJobs);
+    hide("#job-detail");
+    show("#getJob-img");
+    show("#jobs-all");
+    show("#searchbar");
+  };
+
+
+//DOM events//
 
 
 const spinnerEffect = () => {

@@ -60,6 +60,14 @@
 }
 
 .job-description{
-    text-align: justify; }
+    text-align: justify; 
+    white-space: pre; 
+    overflow: hidden;  
+    text-overflow: ellipsis;  
+   }
 
+
+
+
+    
    
