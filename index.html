@@ -36,12 +36,12 @@
 <section id="searchbar" class="container m-5 d-flex flex-wrap justify-content-center">
     <div id="menu-position">
         <select class="me-2 selectpicker show-tick"name="Position" id="position-filter">
-            <option value="">Position</option>                       
+            <option value="">Posicion</option>                       
         </select>
     </div>
     <div id="menu-location">
         <select class="me-2 selectpicker show-tick" name="Location" id="location-filter">
-            <option value="">Location</option>              
+            <option value="">Locacion</option>              
         </select>
     </div>
     <div id="menu-seniority">
@@ -50,8 +50,8 @@
         </select>
     </div>
     <div>
-        <button id="btn-search" type="button" class="button2 me-2 btn btn-primary">Search</button>
-        <button id="btn-clear" type="button" class="button2 me-2 btn btn-outline-primary">Clear</button>
+        <button id="btn-search" type="button" class="button2 me-2 btn btn-primary">Buscar</button>
+        <button id="btn-clear" type="button" class="button2 me-2 btn btn-outline-primary">Limpiar</button>
     </div>
 </section>
 
@@ -75,17 +75,17 @@
                     <div class="d-flex flex-column col-md-6 mx-4">
                     <!-- Position input -->
                     <div class="form-outline mb-4">
-                    <label class="form-label">Position</label>
+                    <label class="form-label">Posicion</label>
                     <input type="text" id="position-form" class="form-control" />
                     </div>
                     <!-- Description input -->
                     <div class="form-outline mb-4">
-                        <label class="form-label">Description</label>
+                        <label class="form-label">Descripcion del Puesto</label>
                         <textarea class="form-control" id="description-form" rows="4"></textarea>
                     </div>
                     <!-- Location input -->
                     <div class="form-outline mb-4">
-                    <label class="form-label">Location</label>
+                    <label class="form-label">Lugar</label>
                     <input type="text" id="location-form" class="form-control" />
                     </div>
                     <!-- Seniority input -->
@@ -94,23 +94,22 @@
                         <input type="text" id="seniority-form" class="form-control"/>
                     </div>
                     <div class="my-2">
-                        <label class="form-label">Programmes</label>
+                        <label class="form-label">Programas</label>
                         <input type="text" id="languages-1"class="form-control mb-2"placeholder="Corel Draw">
                         <input type="text" id="languages-2" class="form-control mb-2" placeholder="Adobe Photshop">
                         <input type="text" id="languages-3" class="form-control mb-2"placeholder="Autocad">
                     </div>
                     <div>
-                        <label class="form-label">Benefits</label>
-                        <input type="text" id="health-form" class="form-control mb-2" placeholder="health insurance">
-                        <input type="text" id="vacations-form" class="form-control mb-2" placeholder="vacations">
-                        <input type="text" id="internet-form" class="form-control mb-2" placeholder="internet">
+                        <label class="form-label">Beneficios</label>
+                        <input type="text" id="health-form" class="form-control mb-2" placeholder="prepaga">
+                        <input type="text" id="vacations-form" class="form-control mb-2" placeholder="semanas de vacaciones">
                     </div>
                     <div class="form-outline mb-4">
-                    <label class="form-label">Salary</label>    
+                    <label class="form-label">Salario</label>    
                     <input type="number" id="salary-form" class="form-control" />      
                     </div>
-                    <button id="btn-add-NewJob"type="button" class="btn btn-primary btn-block mb-4">Submit</button>
-                    <button type="" class="btn btn-primary btn-block mb-4">Cancel</button>
+                    <button id="btn-add-NewJob"type="button" class="btn btn-primary btn-block mb-4">Subir</button>
+                    <button type="" class="btn btn-primary btn-block mb-4">Cancelar</button>
                 </form>
             </section>
 
@@ -121,6 +120,26 @@
                     
                 </div>
             </section>
+
+            <!--Modal-->
+
+            <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Confirme la opcion</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      ¿Está seguro de querer borrar este puesto?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-warning">Confirmar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>        
     <script src="api.js"></script> 

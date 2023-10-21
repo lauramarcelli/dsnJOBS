@@ -26,7 +26,7 @@ const showJobs = (jobs) => {
                     <span class="badge text-bg-secondary">${seniority}</span>
                     </div>
                 </div>
-                <a href="#" class='btn btn-warning button p-1' id="btn-moreInfo" onclick=seeInfoJob(${id})>See Info+</a>
+                <a href="#" class='btn btn-warning button p-1' id="btn-moreInfo" onclick=seeInfoJob(${id})>Ver Info</a>
             </div>
         `;
       $("#jobs-all").appendChild(row);
@@ -46,10 +46,8 @@ const addNewJob = () => {
     seniority: $("#seniority-form").value,
     benefits: {
       vacation: $("#vacations-form").value,
-      health_insurance: $("#health-form").value,
-      internet_paid: $("#internet-form").value,
+      health: $("#health-form").value,
     },
-
     salary: $("#salary-form").value,
     languages: [$("#languages-1").value],
   };
@@ -68,6 +66,8 @@ const detailJobCard = ({
     description,
     seniority,
     location,
+    benefits,
+    languages,
     salary,
     image,
     id
@@ -82,9 +82,12 @@ const detailJobCard = ({
                                 <p id="detail-description">${description}</p>
                                 <p id="detail-seniority">${seniority}</p>
                                 <p id="detail-location">${location}</p>
-                                <p id="detail-salary">${salary}</p>  
-                                <a href="#" id="btn-edit-card" class="btn btn-secondary btn-xs" role="button">Edit</a>
-                                <a href="#" id="btn-delete-card" onclick=deleteApiDsnJob(${id}) class="btn btn-danger btn-default btn-xs" role="button">Delete</a>
+                                <p id="detail-salary">${salary}</p>
+                                <p id="detail-benefits-vac">${benefits.vacation}</p>
+                                <p id="detail-benefits-health">${benefits.health}</p> 
+                                <p id="detail-languages">${languages.join(" - ")}</p>   
+                                <a href="#" id="btn-edit-card" class="btn btn-secondary btn-xs" role="button">Editar</a>
+                                <a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#delete-modal"  id="btn-delete-card" onclick=deleteApiDsnJob(${id}) class="btn btn-danger btn-default btn-xs" role="button">Borrar</a>
                             </div>
                           </div>
                           `;
