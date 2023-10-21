@@ -37,9 +37,11 @@ const showJobs = (jobs) => {
 
 //Function to add a new position//
 
+let inputURL = $("#url");
 
 const addNewJob = () => {
   let newJob = {
+    image: $("#url").value, 
     position: $("#position-form").value,
     description: $("#description-form").value,
     location: $("#location-form").value,
@@ -86,7 +88,7 @@ const detailJobCard = ({
                                 <p id="detail-benefits-vac">${benefits.vacation}</p>
                                 <p id="detail-benefits-health">${benefits.health}</p> 
                                 <p id="detail-languages">${languages.join(" - ")}</p>   
-                                <a href="#" id="btn-edit-card" class="btn btn-secondary btn-xs" role="button">Editar</a>
+                                <a href="#" id="btn-edit-card" onclick=editApiDsnJob(${id}) class="btn btn-secondary btn-xs" role="button">Editar</a>
                                 <a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#delete-modal"  id="btn-delete-card" onclick=deleteApiDsnJob(${id}) class="btn btn-danger btn-default btn-xs" role="button">Borrar</a>
                             </div>
                           </div>
@@ -97,16 +99,46 @@ const detailJobCard = ({
   };
 
 
-  const deleteRenderJob = (id) => {
-    const currentJobs = getDsnJobs().filter(
-      (job) => job.id !== id
-    );
-    deleteApiDsnJob(currentJobs);
-    hide("#job-detail");
-    show("#getJob-img");
-    show("#jobs-all");
-    show("#searchbar");
-  };
+
+//Function to edit a position//
+
+const editOperationForm = () => {
+  hide("#job-detail")
+  hide("#jobs-all");
+  hide("#searchbar");
+  hide("#getJob-img");
+  show("#newJob-section");
+
+  const jobToEditSelected = getDsnJobs(data).find(
+    (job) => job.id === id
+  );
+  $("#url").value = jobToEditSelected.image;
+  $("#position-form").value = jobToEditSelected.position;
+  $("#description-form").value = jobToEditSelected.description;
+  $("#seniority-form").value = jobToEditSelected.seniority;
+  $("#vacations-form").value = jobToEditSelected.benefits;
+  $("#health-form").value = jobToEditSelected.benefits;
+  $("#salary-form").value = jobToEditSelected.salary;
+
+  let editedJob = {
+  image: $("#url").value, 
+  position: $("#position-form").value,
+  description: $("#description-form").value,
+  location: $("#location-form").value,
+  seniority: $("#seniority-form").value,
+  benefits: {
+    vacation: $("#vacations-form").value,
+    health: $("#health-form").value,
+  },
+  salary: $("#salary-form").value,
+  languages: [$("#languages-1").value],
+};
+
+console.log(editedJob);
+editApiDsnJob(editedJob)
+};
+
+
 
 
 //DOM events//

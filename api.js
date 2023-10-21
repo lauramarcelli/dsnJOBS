@@ -55,26 +55,6 @@ const deleteApiDsnJob = async (id) => {
     try {
         const response = await fetch(`https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs/${id}`, {
             method: 'DELETE',
-            body: JSON.stringify(job),
-            headers: {'Content-Type': 'application/json; charset=UTF-8',
-    },
-}
-);
-const data = await response.json();
-console.log(data);
-    } catch (err) {
-        console.log(err);
-    }
-    
-
-} 
-
-//Function to edit a position//    
-
-const editApiDsnJob = async (id) => {
-    try {
-        const response = await fetch(`https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs/${id}`, {
-            method: 'PUT',
             body: "",
             headers: {'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -86,8 +66,28 @@ console.log(data);
         console.log(err);
     }
     
+    
+} 
+
+//Function to edit a position//    
+
+const editApiDsnJob = async (id, editedjob) => {
+    try {
+        const response = await fetch(`https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(editedjob),
+            headers: {'Content-Type': 'application/json; charset=UTF-8',
+    },
+}
+);
+let data = await response.json();
+console.log(data);
+    } catch (err) {
+        console.log(err);
+    }
 
 } 
+
 
 
 //Filtros
@@ -103,6 +103,6 @@ console.log(data);
 }*/
   
 
-// editar -- PATCH para editar parcialmente -- PUT si queremos cambiarle todos los campos--editDsnJob(id)
+
 
 
