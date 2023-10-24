@@ -47,6 +47,8 @@ const seeInfoJob = async (id) => {
   }, 2000);
 };
 
+//Function to get only the id of a position//
+
 const getJobById = async (id) => {
   
     let response = await fetch(
@@ -55,7 +57,7 @@ const getJobById = async (id) => {
   
     let data = await response.json();
   console.log(data);
-  showOperationForm(data)
+  showJobForm(data)
   };
 
 //Function to delete a position//
@@ -91,10 +93,31 @@ const editApiDsnJob = async (id, editedJob) => {
     );
     let data = await response.json();
     console.log(data);
-    /*editOperationForm(data);*/
   } catch (err) {
     console.log(err);
   }
 };
 
-//Function to filter//
+
+//to filter
+
+
+
+
+const getFilterJobs = async (params) =>{
+
+  spinnerEffect();
+
+  let response = await fetch(
+    `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs/${params}`
+  );
+
+  let data = await response.json();
+
+  setTimeout(() => {
+    showJobs(data.results);
+  }, 2000);
+
+};
+
+

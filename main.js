@@ -47,7 +47,12 @@ const addNewJob = () => {
       health: $("#health-form").value,
     },
     salary: $("#salary-form").value,
-    languages: [$("#languages-1").value],
+    languages: [
+      $("#languages-1").value,
+      $("#languages-2").value,
+      $("#languages-3").value
+
+  ],
   };
 
   console.log(newJob);
@@ -99,8 +104,9 @@ const detailJobCard = ({
 
 //Function to edit a position//
 
-const showOperationForm = ({id, image, position, description, seniority, location, benefits, salary, languages}) => {
-  /*$("#btn-edit-card").addEventListener("click", () => editApiDsnJob(id));*/
+const showJobForm = ({id, image, position, description, seniority, location, benefits, salary, languages}) => {
+
+  hide("#btn-add-new-job")
   hide("#job-detail");
   hide("#jobs-all");
   hide("#searchbar");
@@ -126,6 +132,7 @@ const showOperationForm = ({id, image, position, description, seniority, locatio
   
 };
 
+
 const editJob = (id) => {
 
   let editedJob = {
@@ -139,7 +146,11 @@ const editJob = (id) => {
       health: $("#health-form").value,
     },
     salary: $("#salary-form").value,
-    languages: [$("#languages-1").value],
+    languages: [ 
+      $("#languages-1").value,
+      $("#languages-2").value,
+      $("#languages-3").value
+    ],
   };
   
   console.log(editedJob);
@@ -148,7 +159,15 @@ const editJob = (id) => {
   
 }
 
-//Filtros//
+
+
+//Function to filter//
+
+
+/*const showFilter = (jobs) => {
+  const bunchOfOptions = [];
+  jobs.forEach((job) => {
+    if(!bunchOfOptions.includes(job.))*/
 
 const filterLocation = (jobs) => {
   const cities = [];
@@ -157,9 +176,10 @@ const filterLocation = (jobs) => {
       cities.push(job.location);
     }
   });
-  console.log(cities);
+  
 
   $("#location-filter").innerHTML = "";
+  $("#location-filter").innerHTML = `<option value="">Locacion</option>`;
 
   cities.forEach((city) => {
     $("#location-filter").innerHTML += `<option>${city}</option`;
@@ -173,9 +193,9 @@ const filterPosition = (jobs) => {
       positions.push(job.position);
     }
   });
-  console.log(positions);
-
+ 
   $("#position-filter").innerHTML = "";
+  $("#position-filter").innerHTML =  `<option value="">Posicion</option>` ;
 
   positions.forEach((position) => {
     $("#position-filter").innerHTML += `<option>${position}</option`;
@@ -189,14 +209,29 @@ const filterSeniority = (jobs) => {
       seniorities.push(job.seniority);
     }
   });
-  console.log(seniorities);
+  
 
   $("#seniority-filter").innerHTML = "";
+  $("#seniority-filter").innerHTML = `<option value="">Seniority</option>`; 
 
   seniorities.forEach((seniority) => {
     $("#seniority-filter").innerHTML += `<option>${seniority}</option`;
   });
 };
+
+
+const filterJobs = () => {
+  let params = {
+    position: $("#position-filter").value,
+    location: $("#location-filter").value,
+    seniority: $("#seniority-filter").value,
+  };
+  getFilterJobs(new URLSearchParams(params).toString());
+};
+
+$("#btn-search").addEventListener("click", () => filterJobs());
+
+
 
 //DOM events//
 
