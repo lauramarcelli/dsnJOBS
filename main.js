@@ -5,18 +5,16 @@ const hide = (selector) => $(selector).classList.add("visually-hidden");
 const show = (selector) => $(selector).classList.remove("visually-hidden");
 const cleanContainer = (selector) => ($(selector).innerHTML = "");
 
-
 //Function to show all positions//
 
 const showJobs = (jobs) => {
   $("#jobs-all").innerHTML = "";
-    show("#jobs-all");
-    let row = document.createElement("div");
-    row.setAttribute("class", "row");
-    row.classList.add("gap-3");
-    jobs.forEach(
-       ({ position, description, location, seniority, id }) => {
-      row.innerHTML += `
+  show("#jobs-all");
+  let row = document.createElement("div");
+  row.setAttribute("class", "row");
+  row.classList.add("gap-3");
+  jobs.forEach(({ position, description, location, seniority, id }) => {
+    row.innerHTML += `
             <div class="card col-2 d-grid gap-2 d-md-block">
                 <div class="card-body justify-content-center">
                     <h4 class="card-title">${position}</h4>
@@ -29,10 +27,8 @@ const showJobs = (jobs) => {
                 <a href="#" class='btn btn-warning button p-1' id="btn-moreInfo" onclick=seeInfoJob(${id})>Ver Info</a>
             </div>
         `;
-      $("#jobs-all").appendChild(row);
-    }
-  
-  )
+    $("#jobs-all").appendChild(row);
+  });
 };
 
 //Function to add a new position//
@@ -41,7 +37,7 @@ let inputURL = $("#url");
 
 const addNewJob = () => {
   let newJob = {
-    image: $("#url").value, 
+    image: $("#url").value,
     position: $("#position-form").value,
     description: $("#description-form").value,
     location: $("#location-form").value,
@@ -58,24 +54,21 @@ const addNewJob = () => {
   addApiDsnJob(newJob);
 };
 
-
-
 //Function to see a position in detail//
 
-
 const detailJobCard = ({
-    position,
-    description,
-    seniority,
-    location,
-    benefits,
-    languages,
-    salary,
-    image,
-    id
-  }) => {
-    show("#job-detail");
-    $("#job-detail").innerHTML = `
+  position,
+  description,
+  seniority,
+  location,
+  benefits,
+  languages,
+  salary,
+  image,
+  id,
+}) => {
+  show("#job-detail");
+  $("#job-detail").innerHTML = `
     <div class="row">
                         <div class="card col-6">
                             <img src="${image}" id="detail-img" class="card-img-top" alt="character-picture">
@@ -85,64 +78,127 @@ const detailJobCard = ({
                                 <p id="detail-seniority">${seniority}</p>
                                 <p id="detail-location">${location}</p>
                                 <p id="detail-salary">${salary}</p>
-                                <p id="detail-benefits-vac">${benefits.vacation}</p>
-                                <p id="detail-benefits-health">${benefits.health}</p> 
-                                <p id="detail-languages">${languages.join(" - ")}</p>   
-                                <a href="#" id="btn-edit-card" onclick=editApiDsnJob(${id}) class="btn btn-secondary btn-xs" role="button">Editar</a>
+                                <p id="detail-benefits-vac">${
+                                  benefits.vacation
+                                }</p>
+                                <p id="detail-benefits-health">${
+                                  benefits.health
+                                }</p> 
+                                <p id="detail-languages">${languages.join(
+                                  " - "
+                                )}</p>   
+                                <a href="#" id="btn-edit-card" onclick=getJobById(${id}) class="btn btn-secondary btn-xs" role="button">Editar</a>
                                 <a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#delete-modal"  id="btn-delete-card" onclick=deleteApiDsnJob(${id}) class="btn btn-danger btn-default btn-xs" role="button">Borrar</a>
                             </div>
                           </div>
                           `;
   hide("#searchbar");
   hide("#getJob-img");
-  hide("#jobs-all")
-  };
-
-
+  hide("#jobs-all");
+};
 
 //Function to edit a position//
 
-const editOperationForm = () => {
-  hide("#job-detail")
+const showOperationForm = ({id, image, position, description, seniority, location, benefits, salary, languages}) => {
+  /*$("#btn-edit-card").addEventListener("click", () => editApiDsnJob(id));*/
+  hide("#job-detail");
   hide("#jobs-all");
   hide("#searchbar");
   hide("#getJob-img");
   show("#newJob-section");
 
-  const jobToEditSelected = getDsnJobs(data).find(
-    (job) => job.id === id
-  );
-  $("#url").value = jobToEditSelected.image;
-  $("#position-form").value = jobToEditSelected.position;
-  $("#description-form").value = jobToEditSelected.description;
-  $("#seniority-form").value = jobToEditSelected.seniority;
-  $("#vacations-form").value = jobToEditSelected.benefits;
-  $("#health-form").value = jobToEditSelected.benefits;
-  $("#salary-form").value = jobToEditSelected.salary;
+  $("#url").value = image;
+  $("#position-form").value = position;
+  $("#description-form").value = description;
+  $("#seniority-form").value = seniority;
+  $("#location-form").value = location;
+  $("#vacations-form").value = benefits?.vacation;
+  $("#health-form").value = benefits?.health;
+  $("#salary-form").valueAsNumber = salary;
+  $("#languages-1").value = languages[0];
+  $("#languages-2").value = languages[1];
+  $("#languages-3").value = languages[2];
+
+  $("#btn-edit-job").addEventListener("click", (e) => {
+    e.preventDefault();
+    editJob(id);
+  });
+  
+};
+
+const editJob = (id) => {
 
   let editedJob = {
-  image: $("#url").value, 
-  position: $("#position-form").value,
-  description: $("#description-form").value,
-  location: $("#location-form").value,
-  seniority: $("#seniority-form").value,
-  benefits: {
-    vacation: $("#vacations-form").value,
-    health: $("#health-form").value,
-  },
-  salary: $("#salary-form").value,
-  languages: [$("#languages-1").value],
+    image: $("#url").value,
+    position: $("#position-form").value,
+    description: $("#description-form").value,
+    location: $("#location-form").value,
+    seniority: $("#seniority-form").value,
+    benefits: {
+      vacation: $("#vacations-form").value,
+      health: $("#health-form").value,
+    },
+    salary: $("#salary-form").value,
+    languages: [$("#languages-1").value],
+  };
+  
+  console.log(editedJob);
+  editApiDsnJob(id, editedJob);
+
+  
+}
+
+//Filtros//
+
+const filterLocation = (jobs) => {
+  const cities = [];
+  jobs.forEach((job) => {
+    if (!cities.includes(job.location)) {
+      cities.push(job.location);
+    }
+  });
+  console.log(cities);
+
+  $("#location-filter").innerHTML = "";
+
+  cities.forEach((city) => {
+    $("#location-filter").innerHTML += `<option>${city}</option`;
+  });
 };
 
-console.log(editedJob);
-editApiDsnJob(editedJob)
+const filterPosition = (jobs) => {
+  const positions = [];
+  jobs.forEach((job) => {
+    if (!positions.includes(job.position)) {
+      positions.push(job.position);
+    }
+  });
+  console.log(positions);
+
+  $("#position-filter").innerHTML = "";
+
+  positions.forEach((position) => {
+    $("#position-filter").innerHTML += `<option>${position}</option`;
+  });
 };
 
+const filterSeniority = (jobs) => {
+  const seniorities = [];
+  jobs.forEach((job) => {
+    if (!seniorities.includes(job.seniority)) {
+      seniorities.push(job.seniority);
+    }
+  });
+  console.log(seniorities);
 
+  $("#seniority-filter").innerHTML = "";
 
+  seniorities.forEach((seniority) => {
+    $("#seniority-filter").innerHTML += `<option>${seniority}</option`;
+  });
+};
 
 //DOM events//
-
 
 const spinnerEffect = () => {
   show(["#spinner"]);
@@ -152,6 +208,7 @@ const spinnerEffect = () => {
   }, 2000);
 };
 
+$("#position-filter").addEventListener("input", () => filterLocation());
 
 $("#btn-newJob").addEventListener("click", () => {
   show("#newJob-section");
@@ -161,7 +218,7 @@ $("#btn-newJob").addEventListener("click", () => {
   hide("#getJob-img");
 });
 
-$("#btn-add-NewJob").addEventListener("click", (e) => {
+$("#btn-add-new-job").addEventListener("click", (e) => {
   e.preventDefault();
   addNewJob();
   show("#searchbar");
@@ -170,14 +227,11 @@ $("#btn-add-NewJob").addEventListener("click", (e) => {
   hide("#newJob-section");
 });
 
-/*$("#btn-moreInfo").addEventListener("click", (e) => {
-  e.preventDefault();
-  detailJobCard();
-  hide("#searchbar");
-  hide("#getJob-img");
-  hide("#jobs-all");
-  hide("#newJob-section");
-});*/
-
+const initialize = (data) => {
+  showJobs(data);
+  filterLocation(data);
+  filterPosition(data);
+  filterSeniority(data);
+};
 
 window.onload = getDsnJobs();
