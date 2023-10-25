@@ -16,13 +16,14 @@
 <nav id="navbar" class="navbar navbar-light bg-primary navbar-expand-lg">
                 <div class="container-fluid ">
                 <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav">
-                   <li class="nav-item me-2"><a class="nav-link text-white">DSN Jobs</a></li> 
-                   <div class="d-flex flex-col-reverse">
-                      <li class="nav-item me-2 "><a href="" class="nav-link text-white">Inicio</a></li>               
-                    <li class="nav-item me-2">
-                    <button id="btn-newJob" href="" class="newjob nav-link text-white"><i class="me-1 fa-solid fa-thumbtack" style="color: #fafafa;"></i>Nuevo Puesto</button>
-                    </li>
+                    <div class="me-2 mt-2  "><a href="" class="dsn-jobs nav-link text-white">DSN Jobs</a></div>
+                   <div class="ms-auto d-flex flex-col-12 ">
+                    
+                    <ul class="navbar-nav ">
+                      <li class="ms-auto nav-item me-2 top-0 end-0 "><a href="" class="nav-link text-white top-0 end-0">Inicio</a></li>               
+                      <li class="ms-auto nav-item me-2 top-0 end-0">
+                      <button id="btn-newJob" href="" class="newjob nav-link text-white top-0 end-0 ms-auto"><i class=" top-0 end-0 me-1 fa-solid fa-thumbtack" style="color: #fafafa;"></i>Nuevo Puesto</button>
+                      </li>
                    </div>
                 </ul>
               </div>
@@ -50,8 +51,8 @@
         </select>
     </div>
     <div>
-        <button id="btn-search" type="button" class="button2 me-2 btn btn-primary">Buscar</button>
-        <button id="btn-clear" type="button" class="button2 me-2 btn btn-outline-primary">Limpiar</button>
+        <button id="btn-search" type="button" class="button2 me-2 mt-0 p-2 btn btn-primary">Buscar</button>
+        <button id="btn-clear" type="button" class="button2 me-2 mt-0 p-2  btn btn-outline-primary">Limpiar</button>
     </div>
 </section>
 
@@ -59,9 +60,9 @@
     <div id="getJob-img" class="d-flex flex-wrap justify-content-center">
         <img src="assets/dsn-image.jpg" alt="" class="dsn-image">
     </div>
-    <section id= "jobs-all" class="container gap-4 view mb-3"> 
+    <section id= "jobs-all" class="card-bunch container gap-4 view mb-3"> 
     </section>
-    <section id="creating-job"class="view"></section>
+    <section id="creating-job"class="card-bunch view"></section>
     <section id="editing-job"class="view"></section>
     <div>
         <span id="spinner" class ="loader view visually-hidden"><span>
@@ -70,7 +71,7 @@
             <!--Section New Job-->
 
             <section class="container m-auto mb-5 visually-hidden" id="newJob-section">
-                <form class="row g-3 d-flex flex-wrap justify content center">
+                <form class=" mt-4 row g-3 d-flex flex-wrap justify content center">
                     <div class="d-flex justify-content-center mb-4">
                     <div class="d-flex flex-column col-md-6 mx-4">
                     <!-- Position input -->
@@ -109,7 +110,7 @@
                     <input type="number" id="salary-form" class="form-control" />      
                     </div>
                     <div>
-                        <p>Subir imagen</p>
+                        <p class="form-label">Subir imagen</p>
                         <input type="text" id="url" class="text-url mb-4">
                     </div>
                     <button id="btn-add-new-job"type="button" class="btn btn-primary btn-block mb-4">Subir</button>

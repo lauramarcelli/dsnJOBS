@@ -20,11 +20,13 @@ const showJobs = (jobs) => {
                     <h4 class="card-title">${position}</h4>
                     <p class="job-description">${description}</p>
                     <div class="mb-3">
-                    <span class="badge text-bg-secondary">${location}</span>
-                    <span class="badge text-bg-secondary">${seniority}</span>
+                    <span class="badge rounded-pill  text-bg-secondary">${location}</span>
+                    <span class="badge rounded-pill  text-bg-secondary">${seniority}</span>
                     </div>
                 </div>
-                <a href="#" class='btn btn-warning button p-1' id="btn-moreInfo" onclick=seeInfoJob(${id})>Ver Info</a>
+                <div class="button-card">
+                <a href="#" class='button-card btn btn-warning button p-1' id="btn-moreInfo" onclick=seeInfoJob(${id})>Ver Info</a>
+                  </div>
             </div>
         `;
     $("#jobs-all").appendChild(row);
@@ -50,9 +52,8 @@ const addNewJob = () => {
     languages: [
       $("#languages-1").value,
       $("#languages-2").value,
-      $("#languages-3").value
-
-  ],
+      $("#languages-3").value,
+    ],
   };
 
   console.log(newJob);
@@ -74,26 +75,32 @@ const detailJobCard = ({
 }) => {
   show("#job-detail");
   $("#job-detail").innerHTML = `
-    <div class="row">
-                        <div class="card col-6">
-                            <img src="${image}" id="detail-img" class="card-img-top" alt="character-picture">
+    <div class="m-0 row justify-content-center">
+                        <div class="detail-card card col-4">
+                            <img src="${image}" id="detail-img" class=" mb-4 img-fluid rounded card-img-top" alt="character-picture">
                               <div class="">
-                                <h4 style="color:#6495ED"><span class="glyphicon glyphicon-th-large" id="detail-title">${position}</span></h4>
-                                <p id="detail-description">${description}</p>
+                                <h4 style="color:#6495ED"><span class=" mb-4 mt-6 glyphicon glyphicon-th-large" id="detail-title">${position}</span></h4>
+                                <p class="text-description" id="text-description">Descripción del Puesto</p>
+                                <p id="detail-description" class="detail-description">${description}</p>
+                                <p class="seniority-description" id="seniority-description">Seniority</p>
                                 <p id="detail-seniority">${seniority}</p>
+                                <p class="location-description" id="location-description">Locación del Puesto</p>
                                 <p id="detail-location">${location}</p>
-                                <p id="detail-salary">${salary}</p>
-                                <p id="detail-benefits-vac">${
+                                <p class="salary-description" id="salary-description">Remuneración</p>
+                                <p id="detail-salary">$${salary}</p>
+                                <p class="benefits-description" id="benefits-description">Beneficios</p>
+                                <p id="detail-benefits-vac">Vacaciones: ${
                                   benefits.vacation
                                 }</p>
-                                <p id="detail-benefits-health">${
+                                <p id="detail-benefits-health">Cobertura Médica: ${
                                   benefits.health
                                 }</p> 
+                                <p class="programmes-description" id="programmes-description">Programas</p>
                                 <p id="detail-languages">${languages.join(
                                   " - "
                                 )}</p>   
-                                <a href="#" id="btn-edit-card" onclick=getJobById(${id}) class="btn btn-secondary btn-xs" role="button">Editar</a>
-                                <a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#delete-modal"  id="btn-delete-card" onclick=deleteApiDsnJob(${id}) class="btn btn-danger btn-default btn-xs" role="button">Borrar</a>
+                                <a href="#" id="btn-edit-card" onclick=getJobById(${id}) class="btn btn-success mb-2 btn-xs" role="button">Editar</a>
+                                <a href="#" type="button"  data-bs-toggle="modal" data-bs-target="#delete-modal"  id="btn-delete-card" onclick=deleteApiDsnJob(${id}) class="btn btn-danger mb-2 btn-default btn-xs" role="button">Borrar</a>
                             </div>
                           </div>
                           `;
@@ -104,9 +111,18 @@ const detailJobCard = ({
 
 //Function to edit a position//
 
-const showJobForm = ({id, image, position, description, seniority, location, benefits, salary, languages}) => {
-
-  hide("#btn-add-new-job")
+const showJobForm = ({
+  id,
+  image,
+  position,
+  description,
+  seniority,
+  location,
+  benefits,
+  salary,
+  languages,
+}) => {
+  hide("#btn-add-new-job");
   hide("#job-detail");
   hide("#jobs-all");
   hide("#searchbar");
@@ -129,12 +145,9 @@ const showJobForm = ({id, image, position, description, seniority, location, ben
     e.preventDefault();
     editJob(id);
   });
-  
 };
 
-
 const editJob = (id) => {
-
   let editedJob = {
     image: $("#url").value,
     position: $("#position-form").value,
@@ -146,20 +159,16 @@ const editJob = (id) => {
       health: $("#health-form").value,
     },
     salary: $("#salary-form").value,
-    languages: [ 
+    languages: [
       $("#languages-1").value,
       $("#languages-2").value,
-      $("#languages-3").value
+      $("#languages-3").value,
     ],
   };
-  
+
   console.log(editedJob);
   editApiDsnJob(id, editedJob);
-
-  
-}
-
-
+};
 
 //Function to filter//
 
@@ -170,9 +179,9 @@ const filterPosition = (jobs) => {
       positions.push(job.position);
     }
   });
- 
+
   $("#position-filter").innerHTML = "";
-  $("#position-filter").innerHTML =  `<option value="">Posicion</option>` ;
+  $("#position-filter").innerHTML = `<option value="">Posicion</option>`;
 
   positions.forEach((position) => {
     $("#position-filter").innerHTML += `<option>${position}</option`;
@@ -180,14 +189,12 @@ const filterPosition = (jobs) => {
 };
 
 const filterPositionJobs = () => {
-  let paramPosition =  $("#position-filter").value;
+  let paramPosition = $("#position-filter").value;
 
- getFilterPositionJobs(paramPosition);
+  getFilterPositionJobs(paramPosition);
 };
 
 $("#btn-search").addEventListener("click", () => filterPositionJobs());
-
-
 
 const filterLocation = (jobs) => {
   const cities = [];
@@ -196,7 +203,6 @@ const filterLocation = (jobs) => {
       cities.push(job.location);
     }
   });
-  
 
   $("#location-filter").innerHTML = "";
   $("#location-filter").innerHTML = `<option value="">Locacion</option>`;
@@ -207,15 +213,12 @@ const filterLocation = (jobs) => {
 };
 
 const filterLocationJobs = () => {
-  let paramLocation =  $("#location-filter").value;
+  let paramLocation = $("#location-filter").value;
 
- getFilterLocationJobs(paramLocation);
+  getFilterLocationJobs(paramLocation);
 };
 
 $("#btn-search").addEventListener("click", () => filterLocationJobs());
-
-
-
 
 const filterSeniority = (jobs) => {
   const seniorities = [];
@@ -224,9 +227,9 @@ const filterSeniority = (jobs) => {
       seniorities.push(job.seniority);
     }
   });
-  
+
   $("#seniority-filter").innerHTML = "";
-  $("#seniority-filter").innerHTML = `<option value="">Seniority</option>`; 
+  $("#seniority-filter").innerHTML = `<option value="">Seniority</option>`;
 
   seniorities.forEach((seniority) => {
     $("#seniority-filter").innerHTML += `<option>${seniority}</option`;
@@ -234,16 +237,12 @@ const filterSeniority = (jobs) => {
 };
 
 const filterSeniorityJobs = () => {
-  let paramSeniority =  $("#seniority-filter").value;
+  let paramSeniority = $("#seniority-filter").value;
 
- getFilterSeniorityJobs(paramSeniority);
+  getFilterSeniorityJobs(paramSeniority);
 };
 
 $("#btn-search").addEventListener("click", () => filterSeniorityJobs());
-
-
-
-
 
 //DOM events//
 
@@ -255,9 +254,9 @@ const spinnerEffect = () => {
   }, 2000);
 };
 
-
 $("#btn-newJob").addEventListener("click", () => {
   show("#newJob-section");
+  hide("#btn-edit-job")
   hide("#spinner");
   hide("#jobs-all");
   hide("#searchbar");
