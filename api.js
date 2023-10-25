@@ -99,25 +99,60 @@ const editApiDsnJob = async (id, editedJob) => {
 };
 
 
-//to filter
+//Funtions to filter by position, seniority and location
 
 
 
-
-const getFilterJobs = async (params) =>{
+const getFilterPositionJobs = async (position) =>{
 
   spinnerEffect();
 
   let response = await fetch(
-    `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs/${params}`
+    `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs?position=${position}`
   );
 
   let data = await response.json();
 
   setTimeout(() => {
-    showJobs(data.results);
+    showJobs(data);
   }, 2000);
 
 };
+
+const getFilterLocationJobs = async (location) =>{
+
+  spinnerEffect();
+
+  let response = await fetch(
+    `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs?location=${location}`
+  );
+
+  let data = await response.json();
+
+  setTimeout(() => {
+    showJobs(data);
+  }, 2000);
+
+};
+
+const getFilterSeniorityJobs = async (seniority) =>{
+
+  spinnerEffect();
+
+  let response = await fetch(
+    `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs?seniority=${seniority}`
+  );
+
+  let data = await response.json();
+
+  setTimeout(() => {
+    showJobs(data);
+  }, 2000);
+
+};
+
+
+
+
 
 

@@ -163,11 +163,31 @@ const editJob = (id) => {
 
 //Function to filter//
 
-
-/*const showFilter = (jobs) => {
-  const bunchOfOptions = [];
+const filterPosition = (jobs) => {
+  const positions = [];
   jobs.forEach((job) => {
-    if(!bunchOfOptions.includes(job.))*/
+    if (!positions.includes(job.position)) {
+      positions.push(job.position);
+    }
+  });
+ 
+  $("#position-filter").innerHTML = "";
+  $("#position-filter").innerHTML =  `<option value="">Posicion</option>` ;
+
+  positions.forEach((position) => {
+    $("#position-filter").innerHTML += `<option>${position}</option`;
+  });
+};
+
+const filterPositionJobs = () => {
+  let paramPosition =  $("#position-filter").value;
+
+ getFilterPositionJobs(paramPosition);
+};
+
+$("#btn-search").addEventListener("click", () => filterPositionJobs());
+
+
 
 const filterLocation = (jobs) => {
   const cities = [];
@@ -186,21 +206,16 @@ const filterLocation = (jobs) => {
   });
 };
 
-const filterPosition = (jobs) => {
-  const positions = [];
-  jobs.forEach((job) => {
-    if (!positions.includes(job.position)) {
-      positions.push(job.position);
-    }
-  });
- 
-  $("#position-filter").innerHTML = "";
-  $("#position-filter").innerHTML =  `<option value="">Posicion</option>` ;
+const filterLocationJobs = () => {
+  let paramLocation =  $("#location-filter").value;
 
-  positions.forEach((position) => {
-    $("#position-filter").innerHTML += `<option>${position}</option`;
-  });
+ getFilterLocationJobs(paramLocation);
 };
+
+$("#btn-search").addEventListener("click", () => filterLocationJobs());
+
+
+
 
 const filterSeniority = (jobs) => {
   const seniorities = [];
@@ -210,7 +225,6 @@ const filterSeniority = (jobs) => {
     }
   });
   
-
   $("#seniority-filter").innerHTML = "";
   $("#seniority-filter").innerHTML = `<option value="">Seniority</option>`; 
 
@@ -219,17 +233,15 @@ const filterSeniority = (jobs) => {
   });
 };
 
+const filterSeniorityJobs = () => {
+  let paramSeniority =  $("#seniority-filter").value;
 
-const filterJobs = () => {
-  let params = {
-    position: $("#position-filter").value,
-    location: $("#location-filter").value,
-    seniority: $("#seniority-filter").value,
-  };
-  getFilterJobs(new URLSearchParams(params).toString());
+ getFilterSeniorityJobs(paramSeniority);
 };
 
-$("#btn-search").addEventListener("click", () => filterJobs());
+$("#btn-search").addEventListener("click", () => filterSeniorityJobs());
+
+
 
 
 
@@ -243,7 +255,6 @@ const spinnerEffect = () => {
   }, 2000);
 };
 
-$("#position-filter").addEventListener("input", () => filterLocation());
 
 $("#btn-newJob").addEventListener("click", () => {
   show("#newJob-section");
