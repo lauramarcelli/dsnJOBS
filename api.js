@@ -50,15 +50,14 @@ const seeInfoJob = async (id) => {
 //Function to get only the id of a position//
 
 const getJobById = async (id) => {
-  
-    let response = await fetch(
-      `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs/${id}`
-    );
-  
-    let data = await response.json();
+  let response = await fetch(
+    `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs/${id}`
+  );
+
+  let data = await response.json();
   console.log(data);
-  showJobForm(data)
-  };
+  showJobForm(data);
+};
 
 //Function to delete a position//
 
@@ -98,61 +97,19 @@ const editApiDsnJob = async (id, editedJob) => {
   }
 };
 
-
 //Funtions to filter by position, seniority and location
 
-
-
-const getFilterPositionJobs = async (position) =>{
-
+const getFilters = async (key, param) => {
   spinnerEffect();
 
   let response = await fetch(
-    `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs?position=${position}`
+    `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs?${key}=${param}`
   );
 
   let data = await response.json();
+  console.log(key, param);
 
   setTimeout(() => {
     showJobs(data);
   }, 2000);
-
 };
-
-const getFilterLocationJobs = async (location) =>{
-
-  spinnerEffect();
-
-  let response = await fetch(
-    `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs?location=${location}`
-  );
-
-  let data = await response.json();
-
-  setTimeout(() => {
-    showJobs(data);
-  }, 2000);
-
-};
-
-const getFilterSeniorityJobs = async (seniority) =>{
-
-  spinnerEffect();
-
-  let response = await fetch(
-    `https://6524190dea560a22a4e96ab1.mockapi.io/api/jobs?seniority=${seniority}`
-  );
-
-  let data = await response.json();
-
-  setTimeout(() => {
-    showJobs(data);
-  }, 2000);
-
-};
-
-
-
-
-
-

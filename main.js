@@ -188,14 +188,6 @@ const filterPosition = (jobs) => {
   });
 };
 
-const filterPositionJobs = () => {
-  let paramPosition = $("#position-filter").value;
-
-  getFilterPositionJobs(paramPosition);
-};
-
-$("#btn-search").addEventListener("click", () => filterPositionJobs());
-
 const filterLocation = (jobs) => {
   const cities = [];
   jobs.forEach((job) => {
@@ -211,14 +203,6 @@ const filterLocation = (jobs) => {
     $("#location-filter").innerHTML += `<option>${city}</option`;
   });
 };
-
-const filterLocationJobs = () => {
-  let paramLocation = $("#location-filter").value;
-
-  getFilterLocationJobs(paramLocation);
-};
-
-$("#btn-search").addEventListener("click", () => filterLocationJobs());
 
 const filterSeniority = (jobs) => {
   const seniorities = [];
@@ -236,13 +220,33 @@ const filterSeniority = (jobs) => {
   });
 };
 
-const filterSeniorityJobs = () => {
-  let paramSeniority = $("#seniority-filter").value;
+const selectFilterParam = () => {
+  let key = "";
+  let param = "";
 
-  getFilterSeniorityJobs(paramSeniority);
+  if ($("#location-filter").value !== "Locacion") {
+    key = "location";
+    param = $("#location-filter").value;
+    getFilters(key, param);
+  } else if ($("#position-filter").value !== "Posicion") {
+    key = "position";
+    param = $("#position-filter").value;
+
+    getFilters(key, param);
+  } else if ($("#seniority-filter").value !== "Seniority") {
+    key = "seniority";
+    param = $("#seniority-filter").value;
+    getFilters(key, param);
+  }
 };
 
-$("#btn-search").addEventListener("click", () => filterSeniorityJobs());
+$("#btn-search").addEventListener("click", () => selectFilterParam());
+
+$("#btn-clear").addEventListener("click", () => {
+  $("#position-filter").value = "";
+  $("#location-filter").value = "";
+  $("#seniority-filter").value = "";
+});
 
 //DOM events//
 
@@ -256,7 +260,7 @@ const spinnerEffect = () => {
 
 $("#btn-newJob").addEventListener("click", () => {
   show("#newJob-section");
-  hide("#btn-edit-job")
+  hide("#btn-edit-job");
   hide("#spinner");
   hide("#jobs-all");
   hide("#searchbar");
